@@ -9,6 +9,7 @@ nginx:
     - php70
     - php71
     - mysql
+    - es
   volumes:
     - ~/work/vagrant/vHosts:/var/www/html
 
@@ -50,3 +51,8 @@ php71:
     - mysql
   volumes:
     - ~/work/vagrant/vHosts:/var/www/html
+
+es:
+  image: ddogs/elasticsearch
+  ports:
+    - "9200:9200"
