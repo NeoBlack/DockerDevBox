@@ -1,0 +1,73 @@
+version: "2"
+
+services:
+  dnsmasq:
+    image: vukor/dnsmasq
+
+  nginx:
+    image: nginx
+    links:
+      - "php56:php56"
+      - "php70:php70"
+      - "php71:php71"
+#      - "db:db"
+#      - "blackfire:blackfire"
+#      - elasticsearch
+#      - redis
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx:/etc/nginx
+      - ~/work/vagrant/vHosts:/var/www
+
+#  db:
+#    image: mariadb
+#    ports:
+#      - "3306:3306"
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=dev
+#      - MYSQL_USER=dev
+#      - MYSQL_PASSWORD=dev
+#      - MYSQL_DATABASE=dev
+#
+#  blackfire:
+#    restart: always
+#    image: blackfire/blackfire
+#    environment:
+#      - BLACKFIRE_SERVER_ID=f01a844c-635e-43e3-aec4-ec4a4e3006e8
+#      - BLACKFIRE_SERVER_TOKEN=caee79752dbd9dc56e92418c0230c7f5ab32bb7c28846ba81f30158bc35c6c9a
+
+#  elasticsearch:
+#    image: elasticsearch
+#    ports:
+#      - "9200:9200"
+#
+#  redis:
+#    image: redis
+#    ports:
+#      - "6379:6379"
+
+  php56:
+    image: php:5.6-fpm
+    ports:
+      - "9056:9056"
+    volumes:
+      - ./php56/php.ini:/usr/local/etc/php/php.ini
+      - ./php56/etc/php5/fpm/pool.d:/etc/php5/fpm/pool.d
+
+  php70:
+    image: php:7.0-fpm
+    ports:
+      - "9070:9070"
+    volumes:
+      - ./php70/php.ini:/usr/local/etc/php/php.ini
+      - ./php70/etc/php5/fpm/pool.d:/etc/php5/fpm/pool.d
+
+  php71:
+    image: php:7.1-rc-fpm
+    ports:
+      - "9071:9071"
+    volumes:
+      - ./php71/php.ini:/usr/local/etc/php/php.ini
+      - ./php71/etc/php5/fpm/pool.d:/etc/php5/fpm/pool.d
