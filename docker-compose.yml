@@ -2,30 +2,51 @@ nginx:
   build: ./nginx/
   ports:
     - 80:80
+    - 443:443
+    - 3306:3306
   links:
     - php56
     - php70
     - php71
+    - mysql
   volumes:
     - ~/work/vagrant/vHosts:/var/www/html
 
+mysql:
+  image: mysql:latest
+  expose:
+    - "3306"
+  volumes:
+    - /var/lib/mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: dev
+    MYSQL_DATABASE: dev
+    MYSQL_USER: dev
+    MYSQL_PASSWORD: dev
+
 php56:
-  image: php:5.6-fpm
+  build: ./php/php56/
   expose:
     - 9000
+  links:
+    - mysql
   volumes:
     - ~/work/vagrant/vHosts:/var/www/html
 
 php70:
-  image: php:7.0-fpm
+  build: ./php/php70/
   expose:
     - 9000
+  links:
+    - mysql
   volumes:
     - ~/work/vagrant/vHosts:/var/www/html
 
 php71:
-  image: php:7.1-fpm
+  build: ./php/php71/
   expose:
     - 9000
+  links:
+    - mysql
   volumes:
     - ~/work/vagrant/vHosts:/var/www/html
