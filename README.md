@@ -6,6 +6,18 @@ or for starting in background (detached):
 
 run `docker-compose up -d`
 
+## Bash into your containers
+Run one of the following commands to access your containers:
+
+- `docker-compose exec <container-name> bash`
+- `docker-compose exec nginx bash`
+- `docker-compose exec php56 bash`
+- `docker-compose exec php70 bash`
+- `docker-compose exec php71 bash`
+- `docker-compose exec mysql bash`
+- `docker-compose exec es bash`
+- `docker-compose exec redis bash`
+
 ## What is included?
 - PHP 5.6
 - PHP 7.0
