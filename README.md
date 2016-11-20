@@ -18,6 +18,9 @@ Run one of the following commands to access your containers:
 - `docker-compose exec es bash`
 - `docker-compose exec redis bash`
 
+## SSH in your containers
+You can bash into your containers and use your SSH keys from ~/.ssh
+
 ## What is included?
 - PHP 5.6
 - PHP 7.0
