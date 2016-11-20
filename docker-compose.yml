@@ -45,6 +45,8 @@ php56:
     - 9000
   links:
     - mysql
+    - es
+    - redis
   volumes:
     - ~/work:/var/www/html
   environment:
@@ -60,6 +62,8 @@ php70:
     - 9000
   links:
     - mysql
+    - es
+    - redis
   volumes:
     - ~/work:/var/www/html
   environment:
@@ -75,6 +79,8 @@ php71:
     - 9000
   links:
     - mysql
+    - es
+    - redis
   volumes:
     - ~/work:/var/www/html
   environment:
