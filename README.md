@@ -8,6 +8,7 @@ run `docker-compose up`
 - PHP 7.1
 - MySQL (latest)
 - Elasticsearch
+- Redis
 
 ## Database
 You can connect to the MySQL database with the hostname `mysql` on port `3306`
@@ -24,6 +25,9 @@ Examples:
 The following plugins are installed:
 - http://elastic.local.typo3.org/_plugin/head/
 - http://elastic.local.typo3.org/_plugin/kopf/
+
+## Redis
+Redis is running on exposed port 6379
 
 ## Additional Setup
 At the moment you need some manual setup:
