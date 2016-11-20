@@ -3,7 +3,6 @@ nginx:
   ports:
     - 80:80
     - 443:443
-    - 3306:3306
   links:
     - php56
     - php70
@@ -12,12 +11,12 @@ nginx:
     - es
     - redis
   volumes:
-    - ~/work/vagrant/vHosts:/var/www/html
+    - ~/work:/var/www/html
 
 mysql:
   image: mysql:latest
-  expose:
-    - "3306"
+  ports:
+    - "3306:3306"
   volumes:
     - /var/lib/mysql
   environment:
@@ -33,7 +32,7 @@ php56:
   links:
     - mysql
   volumes:
-    - ~/work/vagrant/vHosts:/var/www/html
+    - ~/work:/var/www/html
 
 php70:
   build: ./php/php70/
@@ -42,7 +41,7 @@ php70:
   links:
     - mysql
   volumes:
-    - ~/work/vagrant/vHosts:/var/www/html
+    - ~/work:/var/www/html
 
 php71:
   build: ./php/php71/
@@ -51,7 +50,7 @@ php71:
   links:
     - mysql
   volumes:
-    - ~/work/vagrant/vHosts:/var/www/html
+    - ~/work:/var/www/html
 
 es:
   image: ddogs/elasticsearch

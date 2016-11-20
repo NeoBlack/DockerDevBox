@@ -2,6 +2,10 @@
 
 run `docker-compose up`
 
+or for starting in background (detached):
+
+run `docker-compose up -d`
+
 ## What is included?
 - PHP 5.6
 - PHP 7.0
@@ -11,7 +15,13 @@ run `docker-compose up`
 - Redis
 
 ## Database
-You can connect to the MySQL database with the hostname `mysql` on port `3306`
+You can connect from PHP to the MySQL database with the hostname `mysql` on port `3306`.
+You can also connect from host system to your MySQL database with hostname `127.0.0.1` on port `3306`.
+
+- MySQL root username: root
+- MySQL root password: dev
+- MySQL dev username: dev
+- MySQL dev password: dev
 
 ## PHP Versions
 Default PHP version is `7.0` but you can switch the PHP version by prefix you subdomain:
@@ -44,4 +54,4 @@ Add the following emtries to `/etc/hosts`
 ```
 
 ### Create a folder
-`~/work/vagrant/vHosts/test.local.typo3.org/`
+`~/work/test.local.typo3.org/`
