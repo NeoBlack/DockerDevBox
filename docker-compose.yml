@@ -1,118 +1,119 @@
-nginx:
-  build: ./nginx/
-  ports:
-    - 22:22
-    - 80:80
-    - 443:443
-  links:
-    - php56
-    - php70
-    - php71
-    - mysql
-    - es
-    - redis
-    - ssh-agent
-  volumes:
-    - ~/work:/var/www/html
-  environment:
-    # make ssh keys available via ssh forwarding (see volume entry)
-    - SSH_AUTH_SOCK=/ssh-agent/socket
-  volumes_from:
-    # Use configured whilp/ssh-agent long running container for keys
-    - ssh-agent
+version: '2'
 
-mysql:
-  image: mysql:latest
-  ports:
-    - "3306:3306"
-  volumes:
-    - /var/lib/mysql
-  environment:
-    MYSQL_ROOT_PASSWORD: dev
-    MYSQL_DATABASE: dev
-    MYSQL_USER: dev
-    MYSQL_PASSWORD: dev
-  environment:
-    # make ssh keys available via ssh forwarding (see volume entry)
-    - SSH_AUTH_SOCK=/ssh-agent/socket
-  volumes_from:
-    # Use configured whilp/ssh-agent long running container for keys
-    - ssh-agent
+services:
+  # app conf container
+  data:
+    image: tianon/true
+    container_name: data
+    volumes:
+      - ~/work:/var/www/html
+      - ~/.ssh:/root/.ssh
 
-php56:
-  build: ./php/php56/
-  expose:
-    - 9000
-  links:
-    - mysql
-    - es
-    - redis
-  volumes:
-    - ~/work:/var/www/html
-  environment:
-    # make ssh keys available via ssh forwarding (see volume entry)
-    - SSH_AUTH_SOCK=/ssh-agent/socket
-  volumes_from:
-    # Use configured whilp/ssh-agent long running container for keys
-    - ssh-agent
+  # nginx container
+  nginx:
+    build: ./nginx/
+    ports:
+      - 80:80
+      - 443:443
+    links:
+      - php56
+      - php70
+      - php71
+      - mysql
+      - es
+      - redis
+      - ssh-agent
+    environment:
+      - SSH_AUTH_SOCK=/ssh-agent/socket
+    volumes_from:
+      - ssh-agent
+      - data
 
-php70:
-  build: ./php/php70/
-  expose:
-    - 9000
-  links:
-    - mysql
-    - es
-    - redis
-  volumes:
-    - ~/work:/var/www/html
-  environment:
-    # make ssh keys available via ssh forwarding (see volume entry)
-    - SSH_AUTH_SOCK=/ssh-agent/socket
-  volumes_from:
-    # Use configured whilp/ssh-agent long running container for keys
-    - ssh-agent
+  # MySQL container
+  mysql:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    volumes:
+      - /var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: dev
+      MYSQL_DATABASE: dev
+      MYSQL_USER: dev
+      MYSQL_PASSWORD: dev
+    environment:
+      - SSH_AUTH_SOCK=/ssh-agent/socket
+    volumes_from:
+      - ssh-agent
+      - data
 
-php71:
-  build: ./php/php71/
-  expose:
-    - 9000
-  links:
-    - mysql
-    - es
-    - redis
-  volumes:
-    - ~/work:/var/www/html
-  environment:
-    # make ssh keys available via ssh forwarding (see volume entry)
-    - SSH_AUTH_SOCK=/ssh-agent/socket
-  volumes_from:
-    # Use configured whilp/ssh-agent long running container for keys
-    - ssh-agent
+  # PHP 5.6 container
+  php56:
+    build: ./php/php56/
+    expose:
+      - 9000
+    links:
+      - mysql
+      - es
+      - redis
+    environment:
+      - SSH_AUTH_SOCK=/ssh-agent/socket
+    volumes_from:
+      - ssh-agent
+      - data
 
-es:
-  image: ddogs/elasticsearch
-  ports:
-    - "9200:9200"
-  environment:
-    # make ssh keys available via ssh forwarding (see volume entry)
-    - SSH_AUTH_SOCK=/ssh-agent/socket
-  volumes_from:
-    # Use configured whilp/ssh-agent long running container for keys
-    - ssh-agent
+  # PHP 7.0 container
+  php70:
+    build: ./php/php70/
+    expose:
+      - 9000
+    links:
+      - mysql
+      - es
+      - redis
+    environment:
+      - SSH_AUTH_SOCK=/ssh-agent/socket
+    volumes_from:
+      - ssh-agent
+      - data
 
-redis:
-  image: redis
-  ports:
-    - "6379"
-  environment:
-    # make ssh keys available via ssh forwarding (see volume entry)
-    - SSH_AUTH_SOCK=/ssh-agent/socket
-  volumes_from:
-    # Use configured whilp/ssh-agent long running container for keys
-    - ssh-agent
+  # PHP 7.1 container
+  php71:
+    build: ./php/php71/
+    expose:
+      - 9000
+    links:
+      - mysql
+      - es
+      - redis
+    environment:
+      - SSH_AUTH_SOCK=/ssh-agent/socket
+    volumes_from:
+      - ssh-agent
+      - data
 
-ssh-agent:
-  image: whilp/ssh-agent:latest
-  volumes:
-    - ~/.ssh:/root/.ssh
+  # Elasticsearch container
+  es:
+    image: ddogs/elasticsearch
+    environment:
+      - SSH_AUTH_SOCK=/ssh-agent/socket
+    volumes_from:
+      - ssh-agent
+      - data
+
+  # Redis container
+  redis:
+    image: redis
+    ports:
+      - "6379"
+    environment:
+      - SSH_AUTH_SOCK=/ssh-agent/socket
+    volumes_from:
+      - ssh-agent
+      - data
+
+  # SSH-Agent container
+  ssh-agent:
+    image: whilp/ssh-agent:latest
+    volumes_from:
+      - data
