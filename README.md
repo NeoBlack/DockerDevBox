@@ -7,8 +7,6 @@ or for starting it in the background (detached):
 run `docker-compose up -d`
 
 ## TODOs, What's missing?
-- MailHog container
-- Solr container
 - Add GraphicsMagick / ImageMagick
 - Add static external IP address for the nginx container instead of 0.0.0.0
 
@@ -19,6 +17,7 @@ run `docker-compose up -d`
 - MySQL (latest)
 - Elasticsearch
 - Redis
+- Mailhog
 
 ## Bash into your containers
 Run one of the following commands to access your containers:
@@ -60,6 +59,13 @@ The following plugins are installed:
 
 ## Redis
 Redis is running on port 6379
+
+## Mailhog
+Mailhog catches all mails send by PHP or over `mail:1025` via SMTP.
+
+You can access the nice looking web mail interface under:
+
+- http://mail.local.typo3.org
 
 ## Additional Setup
 At the moment you need some additional setup:

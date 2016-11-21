@@ -104,6 +104,9 @@ services:
       - ssh-agent
       - data
 
+  mail:
+    image: mailhog/mailhog:latest
+
   # Redis container
   redis:
     image: redis
