@@ -1,5 +1,8 @@
 version: '2'
 
+##########################
+# Services
+##########################
 services:
   # app conf container
   data:
@@ -35,13 +38,13 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - /var/lib/mysql
+      # the datavolume persist as long as you are not typing docker-compose down -v
+      - datavolume:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: dev
-      MYSQL_DATABASE: dev
-      MYSQL_USER: dev
-      MYSQL_PASSWORD: dev
-    environment:
+      - MYSQL_ROOT_PASSWORD=dev
+      - MYSQL_DATABASE=dev
+      - MYSQL_USER=dev
+      - MYSQL_PASSWORD=dev
       - SSH_AUTH_SOCK=/ssh-agent/socket
     volumes_from:
       - ssh-agent
@@ -117,3 +120,9 @@ services:
     image: whilp/ssh-agent:latest
     volumes_from:
       - data
+
+##########################
+# Volumes
+##########################
+volumes:
+  datavolume:

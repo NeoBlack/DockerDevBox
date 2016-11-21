@@ -7,6 +7,7 @@ RUN sed -i 's/docker-php-\(ext-$ext.ini\)/\1/' /usr/local/bin/docker-php-ext-ins
 
 # Install other needed extensions
 RUN apt-get update && \
+   apt-get install -y mysql-client && \
    apt-get install -y ssh && \
    apt-get install -y rsync && \
    apt-get install -y libfreetype6-dev libjpeg62-turbo-dev && \
