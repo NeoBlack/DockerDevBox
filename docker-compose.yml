@@ -15,7 +15,6 @@ services:
   # nginx container
   nginx:
     build: ./nginx/
-    network_mode: default
     ports:
       - "80:80"
       - "443:443"
@@ -37,7 +36,6 @@ services:
   # MySQL container
   mysql:
     image: mysql:latest
-    network_mode: default
     ports:
       - "3306:3306"
     volumes:
@@ -56,7 +54,6 @@ services:
   # PHP 5.6 container
   php56:
     build: ./php/php56/
-    network_mode: default
     expose:
       - 9000
     links:
@@ -73,7 +70,6 @@ services:
   # PHP 7.0 container
   php70:
     build: ./php/php70/
-    network_mode: default
     expose:
       - 9000
     links:
@@ -90,7 +86,6 @@ services:
   # PHP 7.1 container
   php71:
     build: ./php/php71/
-    network_mode: default
     expose:
       - 9000
     links:
@@ -107,7 +102,6 @@ services:
   # Elasticsearch container
   es:
     build: ./elasticsearch
-    network_mode: default
     environment:
       - SSH_AUTH_SOCK=/ssh-agent/socket
     volumes_from:
@@ -116,12 +110,10 @@ services:
 
   mail:
     image: mailhog/mailhog:latest
-    network_mode: default
 
   # Redis container
   redis:
     image: redis
-    network_mode: default
     ports:
       - "6379"
     environment:
@@ -133,7 +125,6 @@ services:
   # SSH-Agent container
   ssh-agent:
     image: whilp/ssh-agent:latest
-    network_mode: default
     volumes_from:
       - data
 

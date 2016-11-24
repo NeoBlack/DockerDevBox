@@ -2,9 +2,9 @@ FROM nginx:latest
 
 MAINTAINER Frank Nägler <frank.naegler@typo3.com>
 
-COPY ./local.typo3.org.conf /etc/nginx/conf.d/local.typo3.org.conf
-COPY ./elastic.local.typo3.org.conf /etc/nginx/conf.d/elastic.local.typo3.org.conf
-COPY ./mail.local.typo3.org.conf /etc/nginx/conf.d/mail.local.typo3.org.conf
+COPY ./devbox.21r.de.conf /etc/nginx/conf.d/devbox.21r.de.conf
+COPY ./elastic.devbox.21r.de.conf /etc/nginx/conf.d/elastic.devbox.21r.de.conf
+COPY ./mail.devbox.21r.de.conf /etc/nginx/conf.d/mail.devbox.21r.de.conf
 
 # Install mysql client
 RUN apt-get update && \
