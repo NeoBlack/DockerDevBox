@@ -97,7 +97,7 @@ services:
 
   # Elasticsearch container
   es:
-    image: ddogs/elasticsearch
+    build: ./elasticsearch
     environment:
       - SSH_AUTH_SOCK=/ssh-agent/socket
     volumes_from:

@@ -1,0 +1,10 @@
+elasticsearch:
+  image: ddogs/elasticsearch
+  hostname: elasticsearch
+  privileged: true
+  volumes:
+    - ./storage:/usr/share/elasticsearch/data
+    - ./config:/usr/share/elasticsearch/config
+  ports:
+    - "9200:9200/tcp"
+    - "9300:9300/tcp"

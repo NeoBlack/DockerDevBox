@@ -1,0 +1,35 @@
+elasticsearchdata1:
+  image: ddogs/elasticsearch
+  hostname: elasticsearch_data1
+  command: elasticsearch -Des.cluster.name="dd" -Des.node.name="dd_es1"
+  privileged: true
+  volumes:
+    - ./storage:/usr/share/elasticsearch/data
+    - ./config:/usr/share/elasticsearch/config
+elasticsearchdata2:
+  image: ddogs/elasticsearch
+  hostname: elasticsearch_data2
+  command: elasticsearch -Des.cluster.name="dd" -Des.node.name="dd_es2"
+  privileged: true
+  volumes:
+    - ./storage:/usr/share/elasticsearch/data
+    - ./config:/usr/share/elasticsearch/config
+elasticsearchdata3:
+  image: ddogs/elasticsearch
+  hostname: elasticsearch_data3
+  command: elasticsearch -Des.cluster.name="dd" -Des.node.name="dd_es3"
+  privileged: true
+  volumes:
+    - ./storage:/usr/share/elasticsearch/data
+    - ./config:/usr/share/elasticsearch/config
+elasticsearchclient1:
+  image: ddogs/elasticsearch
+  hostname: elasticsearch_client1
+  privileged: true
+  command: elasticsearch -Des.cluster.name="dd" -Des.node.name="dd_es_client" -Des.node.master=false -Des.node.data=false
+  volumes:
+    - ./storage:/usr/share/elasticsearch/data
+    - ./config:/usr/share/elasticsearch/config
+  ports:
+    - "9200:9200/tcp"
+    - "9300:9300/tcp"
