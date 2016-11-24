@@ -7,7 +7,6 @@ or for starting it in the background (detached):
 run `docker-compose up -d`
 
 ## TODOs, What's missing?
-- Add GraphicsMagick / ImageMagick
 - Add static external IP address for the nginx container instead of 0.0.0.0
 
 ## What is included?
@@ -18,6 +17,7 @@ run `docker-compose up -d`
 - Elasticsearch
 - Redis
 - Mailhog
+- GraphicsMagick
 
 ## Bash into your containers
 Run one of the following commands to access your containers:
