@@ -14,7 +14,12 @@ run `docker-compose up -d`
 - Elasticsearch
 - Redis
 - Mailhog
+- Shell-in-a-box
 - GraphicsMagick
+
+## What is missing?
+- xdebug
+- xhprof / blackfire
 
 ## Bash into your containers
 Run one of the following commands to access your containers:
@@ -31,6 +36,11 @@ Run one of the following commands to access your containers:
 
 ## SSH in your containers
 You can bash into your containers and use your SSH keys from ~/.ssh
+
+## Shell-in-a-box
+Shell access from your browser use `dev` as username and password:
+
+- http://shell.devbox.21r.de
 
 ## Database
 You can connect from PHP to the MySQL database with the hostname `mysql` on port `3306`.

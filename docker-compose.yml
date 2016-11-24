@@ -26,6 +26,7 @@ services:
       - es
       - redis
       - mail
+      - shell
       - ssh-agent
     environment:
       - SSH_AUTH_SOCK=/ssh-agent/socket
@@ -118,6 +119,19 @@ services:
       - "6379"
     environment:
       - SSH_AUTH_SOCK=/ssh-agent/socket
+    volumes_from:
+      - ssh-agent
+      - data
+
+  shell:
+    image: sspreitzer/shellinabox:latest
+    environment:
+      - SIAB_SSL=false
+      - SIAB_USER=dev
+      - SIAB_PASSWORD=dev
+      - SIAB_SUDO=true
+    expose:
+      - 4200
     volumes_from:
       - ssh-agent
       - data
