@@ -1,3 +1,5 @@
+![DevelopmentBox based on Docker](https://raw.githubusercontent.com/NeoBlack/DockerDevBox/master/assets/logo.png)
+
 # DockerDevBox
 
 run `docker-compose up`
