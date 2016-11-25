@@ -14,8 +14,11 @@ RUN apt-get update && \
    apt-get install -y ssmtp && \
    apt-get install -y libfreetype6-dev libjpeg62-turbo-dev && \
    apt-get install -y libldap2-dev && \
+   apt-get install -y libxml2-dev && \
    docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
    docker-php-ext-install ldap && \
+   docker-php-ext-install soap && \
+   docker-php-ext-install zip && \
    docker-php-ext-install mysqli && \
    docker-php-ext-install mbstring && \
    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/  &&  \
