@@ -4,14 +4,6 @@ version: '2'
 # Services
 ##########################
 services:
-  # app conf container
-  data:
-    image: tianon/true
-    container_name: data
-    volumes:
-      - ~/work:/var/www/html
-      - ~/.ssh:/root/.ssh
-
   # nginx container
   nginx:
     build: ./nginx/
@@ -30,9 +22,9 @@ services:
       - ssh-agent
     environment:
       - SSH_AUTH_SOCK=/ssh-agent/socket
-    volumes_from:
-      - ssh-agent
-      - data
+    volumes:
+      - ~/work:/var/www/html
+      - ~/.ssh:/root/.ssh
 
   # MySQL container
   mysql:
@@ -42,6 +34,8 @@ services:
     volumes:
       # the datavolume persist as long as you are not typing docker-compose down -v
       - datavolume:/var/lib/mysql
+      - ~/work:/var/www/html
+      - ~/.ssh:/root/.ssh
     environment:
       - MYSQL_ROOT_PASSWORD=dev
       - MYSQL_DATABASE=dev
@@ -52,9 +46,6 @@ services:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
       - --skip-character-set-client-handshake
-    volumes_from:
-      - ssh-agent
-      - data
 
   # PHP 5.6 container
   php56:
@@ -68,9 +59,9 @@ services:
       - mail
     environment:
       - SSH_AUTH_SOCK=/ssh-agent/socket
-    volumes_from:
-      - ssh-agent
-      - data
+    volumes:
+      - ~/work:/var/www/html
+      - ~/.ssh:/root/.ssh
 
   # PHP 7.0 container
   php70:
@@ -84,9 +75,9 @@ services:
       - mail
     environment:
       - SSH_AUTH_SOCK=/ssh-agent/socket
-    volumes_from:
-      - ssh-agent
-      - data
+    volumes:
+      - ~/work:/var/www/html
+      - ~/.ssh:/root/.ssh
 
   # PHP 7.1 container
   php71:
@@ -100,18 +91,18 @@ services:
       - mail
     environment:
       - SSH_AUTH_SOCK=/ssh-agent/socket
-    volumes_from:
-      - ssh-agent
-      - data
+    volumes:
+      - ~/work:/var/www/html
+      - ~/.ssh:/root/.ssh
 
   # Elasticsearch container
   es:
     build: ./elasticsearch
     environment:
       - SSH_AUTH_SOCK=/ssh-agent/socket
-    volumes_from:
-      - ssh-agent
-      - data
+    volumes:
+      - ~/work:/var/www/html
+      - ~/.ssh:/root/.ssh
 
   mail:
     image: mailhog/mailhog:latest
@@ -123,9 +114,9 @@ services:
       - "6379"
     environment:
       - SSH_AUTH_SOCK=/ssh-agent/socket
-    volumes_from:
-      - ssh-agent
-      - data
+    volumes:
+      - ~/work:/var/www/html
+      - ~/.ssh:/root/.ssh
 
   shell:
     image: sspreitzer/shellinabox:latest
@@ -136,15 +127,16 @@ services:
       - SIAB_SUDO=true
     expose:
       - 4200
-    volumes_from:
-      - ssh-agent
-      - data
+    volumes:
+      - ~/work:/var/www/html
+      - ~/.ssh:/root/.ssh
 
   # SSH-Agent container
   ssh-agent:
     image: whilp/ssh-agent:latest
-    volumes_from:
-      - data
+    volumes:
+      - ~/work:/var/www/html
+      - ~/.ssh:/root/.ssh
 
 ##########################
 # Volumes
