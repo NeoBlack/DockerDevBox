@@ -2,6 +2,10 @@
 
 # DockerDevBox
 
+1) copy `.env.example` into `.env` and adjust the parameters if you want.
+
+2) Start the docker box:
+
 run `docker-compose up`
 
 or for starting it in the background (detached):
