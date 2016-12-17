@@ -107,6 +107,7 @@ services:
     environment:
       - SSH_AUTH_SOCK=/ssh-agent/socket
     volumes:
+      - datavolume:/usr/share/elasticsearch/data
       - $WORK_DIR:/var/www/html
       - ~/.ssh:/root/.ssh
 

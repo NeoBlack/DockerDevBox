@@ -14,12 +14,9 @@ ENV ES_HEAP_SIZE 1g
 ENV MAX_OPEN_FILES=65535
 ENV MAX_LOCKED_MEMORY=unlimited
 
-
-
 # optional volumes for data and config directory
 VOLUME /usr/share/elasticsearch/data
 VOLUME /usr/share/elasticsearch/config
-
 
 # install ES plugins (marvel, kopf, head)
 RUN /usr/share/elasticsearch/bin/plugin install mobz/elasticsearch-head/latest && \
