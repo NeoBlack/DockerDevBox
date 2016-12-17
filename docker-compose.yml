@@ -107,7 +107,8 @@ services:
     environment:
       - SSH_AUTH_SOCK=/ssh-agent/socket
     volumes:
-      - datavolume:/usr/share/elasticsearch/data
+      # the datavolume persist as long as you are not typing docker-compose down -v
+      - datavolume_es:/usr/share/elasticsearch/data
       - $WORK_DIR:/var/www/html
       - ~/.ssh:/root/.ssh
 
@@ -153,4 +154,7 @@ services:
 # Volumes
 ##########################
 volumes:
+  # MySQL
   datavolume:
+  # ElasticSearch
+  datavolume_es:
