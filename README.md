@@ -1,3 +1,8 @@
+*** 
+> :bangbang: **This project is no longer maintained. Because of a lot performance issues on Mac OSX, I decide to not work on it anymore. If anyone will take care of this project, feel free to fork this project or contact me.**
+
+***
+
 ![DevelopmentBox based on Docker](https://raw.githubusercontent.com/NeoBlack/DockerDevBox/master/assets/logo.png)
 
 # DockerDevBox
